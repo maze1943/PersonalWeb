@@ -1,0 +1,116 @@
+// 变量定义
+//属性值
+@color : blue;
+@bgcolor : #555;
+@width : 100px;
+@height : 100px;
+//属性名
+@fontSize : font-size;
+// 选择器
+@wrapSelector : #wrap;
+@img : .image;
+// url
+@imageUrl : "/images";
+//变量集合
+@square100 : {
+    width: @width;
+    height: @height;
+}
+//变量计算
+@widthDouble : {
+    width: @width + @height*2;
+}
+
+
+// 样式定义时使用变量
+@{wrapSelector} {
+    color: @color;
+    background: @bgcolor;
+    @square100();
+    @{fontSize} : 20px;
+}
+@{img} {
+    background-image : url("@{imageUrl}/jsIcon.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    @square100();
+    @widthDouble();
+}
+// 声明变量
+@circleRed : {
+    width : 100px;
+    height : 100px;
+    border-radius : 100px;
+    background-color : red;
+}
+.circle{
+    @circleRed();
+}
+
+// 嵌套
+@width : 150px;
+ul{
+    color : red;
+    @width : 100px;
+    li{
+        width : @width;
+    }
+}
+#header{
+    &:after{
+      content:"Less is more!";
+    }
+    .title{
+      font-weight:bold;
+    }
+    &_content{
+      margin-top:20px;
+    }
+}
+
+// 混合(Mixin)，支持传入参数
+.card(@color:#333) {
+    background: @color;
+    -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
+    box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
+}
+#wrap{
+  .card(#ffffff);
+}
+
+.square(@weight : 1px, @borderSolid : solid, @color : #333,){
+    width : @width;
+    height : @height;
+    border : @arguments;//类似js中的arguments类数组
+    color : @color;
+}
+@{wrapSelector}{
+    background-image : url("@{imageUrl}/jsIcon.jpg");
+    .square();//未传入参数，使用默认值
+}
+@{wrapSelector}{
+    background-image : url("@{imageUrl}/jsIcon.jpg");
+    .square(2px, solid, red);//使用传入的参数
+}
+
+/* Less */
+.triangle(top,@width:20px,@color:#000){
+    border-color:transparent  transparent @color transparent ;
+}
+.triangle(right,@width:20px,@color:#000){
+    border-color:transparent @color transparent  transparent ;
+}
+
+.triangle(bottom,@width:20px,@color:#000){
+    border-color:@color transparent  transparent  transparent ;
+}
+.triangle(left,@width:20px,@color:#000){
+    border-color:transparent  transparent  transparent @color;
+}
+.triangle(@_,@width:20px,@color:#000){
+    border-style: solid;
+    border-width: @width;
+}
+#main{
+    .triangle(left, 50px, #999)
+}
