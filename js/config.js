@@ -10,5 +10,9 @@ app.config(function($routeProvider){
             templateUrl: "/html/LessTest.html",
             controller: "LessTestCtrl"
         })
+        .when('/aboutThis', {
+            templateUrl: "/html/aboutThis.html",
+            controller: "aboutThisCtrl"
+        })
         .otherwise({ redirectTo: '/tabs' });
     });

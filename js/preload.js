@@ -1,6 +1,5 @@
 (function () {
     var cssFiles = [
-        'css/main.css',
         'css/all.css',
         'lib/plugins/ngDialog/ngDialog.min.css',
         'lib/plugins/ngDialog/ngDialog-theme-plain.min.css'
