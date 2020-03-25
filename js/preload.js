@@ -1,23 +1,24 @@
-(function () {
-    var cssFiles = [
+// (() =>{
+    const cssFiles = [
         'css/all.css',
-        'lib/plugins/ngDialog/ngDialog.min.css',
-        'lib/plugins/ngDialog/ngDialog-theme-plain.min.css'
+        // 'lib/plugins/ngDialog/ngDialog.min.css',
+        // 'lib/plugins/ngDialog/ngDialog-theme-plain.min.css'
     ];
-    var jsFiles = [
+    const jsFiles = [
         'lib/angular.min.js',
-        'lib/angular-route.js',
-        'lib/plugins/ngDialog/ngDialog.min.js',
+        'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+        // 'lib/plugins/ngDialog/ngDialog.min.js',
+        'https://cdn.staticfile.org/axios/0.18.0/axios.min.js',
         'js/lazyload.js',
-        'js/config.js',
+        'js/router.js',
         'js/service.js',
         'js/main.js',
         'js/directive.js',
         'js/app.js'
     ];
 
-    function cssLoader() {
-        var headElement = document.getElementsByTagName('head')[0];
+    function cssLoader(cssFiles) {
+        const headElement = document.getElementsByTagName('head')[0];
 
         function appendCssLink(path) {
             var csslink = document.createElement('link');
@@ -26,13 +27,12 @@
             csslink.href = path;
             headElement.appendChild(csslink);
         }
-        for (var i = 0; i < cssFiles.length; i++) {
-            appendCssLink(cssFiles[i]);
-        }
+        cssFiles.map((cssFile)=>{
+            appendCssLink(cssFile);
+        });
 
     }
-
-    function jsLoader() {
+    function jsLoader(jsFiles) {
         var headElement = document.getElementsByTagName('head')[0];
 
         function appendScript(path) {
@@ -42,10 +42,10 @@
             jsscript.src = path;
             headElement.appendChild(jsscript);
         }
-        for(var i = 0; i < jsFiles.length; i++){
-            appendScript(jsFiles[i]);
-        }
+        jsFiles.map((jsFile)=>{
+            appendScript(jsFile);
+        });
     }
     cssLoader(cssFiles);
     jsLoader(jsFiles);
-})();
+// })();

@@ -43,3 +43,9 @@ app.directive('viewController', function () {
         }
     };
 });
+app.directive('loadFile', function(){
+    return {
+        restrict :'EA',
+        
+    }
+})

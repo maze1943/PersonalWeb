@@ -8,6 +8,7 @@
 @fontSize : font-size;
 // 选择器
 @wrapSelector : #wrap;
+@button : button;
 @img : .image;
 // url
 @imageUrl : "/images";
@@ -35,6 +36,9 @@
     background-size: contain;
     @square100();
     @widthDouble();
+}
+@{button} {
+    @circleRed();
 }
 // 声明变量
 @circleRed : {
