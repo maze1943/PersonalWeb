@@ -1,17 +1,27 @@
 var app = angular.module("app", ['ui.router']);
 app.config(['$stateProvider', '$urlRouterProvider', 
     function ($stateProvider, $urlRouterProvider) {$stateProvider
-            .state("Blog", {
+            .state('main',{
+                name:'main',
+                abstract:true,
+                url:'/main',
+                templateUrl: '/html/main/main.html'
+            })
+            .state("main.Blog", {
                 url: '/Blog',
-                templateUrl: '/html/Blog/Blog.html',
+                templateUrl: '/html/Blog/BlogList.html',
                 controller:'blogCtrl',
-                resolve:load(['/html/Blog/Blog.js'])
+            })
+            .state("main.BlogDetail", {
+                url: '/BlogDetail',
+                params:{"path":null},
+                templateUrl: '/html/Blog/BlogDetail.html',
+                controller:'blogDetailCtrl',
             })
             .state("Home", {
                 url: '/Home',
                 templateUrl: '/html/Home/Home.html',
                 controller:'HomeCtrl',
-                resolve:load(['/html/Home/Home.js'])
             });
         }]);
         const load = function(jsFiles){

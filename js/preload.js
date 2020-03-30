@@ -6,7 +6,8 @@
     ];
     const jsFiles = [
         'lib/angular.min.js',
-        'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+        // 'node_modules/angular-ui-router/release/angular-ui-router.min.js',
+        'https://cdn.bootcss.com/angular-ui-router/1.0.25/angular-ui-router.min.js',
         // 'lib/plugins/ngDialog/ngDialog.min.js',
         'https://cdn.staticfile.org/axios/0.18.0/axios.min.js',
         'js/lazyload.js',

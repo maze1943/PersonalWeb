@@ -1,14 +1,62 @@
-app.controller('HomeCtrl',HomeCtrl);
-function HomeCtrl($scope){
-    $scope.HomeInit = ()=>{
-
+app.controller('blogCtrl', blogCtrl);
+function blogCtrl($scope, $state){
+    let detailPath = "";
+    $scope.listInit = ()=>{
+        $scope.blogList = [
+            {
+                title:'001_let及const声明',
+                path:'001_let及const声明.md'
+            },
+            {
+                title:'002_变量的解构赋值',
+                path:'002_变量的解构赋值.md'
+            },
+            {
+                title:'003_字符串的拓展',
+                path:'003_字符串的拓展.md'
+            },
+            {
+                title:'004_函数的拓展',
+                path:'004_函数的拓展.md'
+            },
+            {
+                title:'005_数组的拓展',
+                path:'005_数组的拓展.md'
+            },
+            {
+                title:'006_对象的拓展',
+                path:'006_对象的拓展.md'
+            },
+            {
+                title:'007_Symbol',
+                path:'007_Symbol.md'
+            },
+            {
+                title:'009_Proxy',
+                path:'009_Proxy.md'
+            },
+            {
+                title:'0010_Promise',
+                path:'0010_Promise.md'
+            }
+        ];
+    }
+    $scope.goBlogArticle = (path)=>{
+        detailPath = path;
+        $state.go('main.BlogDetail',{path:path});
     }
 }
-
-app.controller('blogCtrl',blogCtrl);
-function blogCtrl($scope){
-    $scope.blogInit = ()=>{
-        
+app.controller('blogDetailCtrl', blogDetailCtrl);
+function blogDetailCtrl($scope,$stateParams,lazyLoadService){
+    $scope.detailInit = ()=>{
+        const blogPath = "/data/markdowns/";
+        lazyLoadService(['https://cdn.bootcss.com/showdown/1.9.1/showdown.min.js']).then(()=>{
+            return axios.get(blogPath + $stateParams.path);
+        }).then((content)=>{
+            const converter = new showdown.Converter();
+            const html = converter.makeHtml(content.data);
+            document.getElementsByClassName("markdown-body")[0].innerHTML = html;
+        });
     }
 }
 
